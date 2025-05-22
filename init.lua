@@ -479,13 +479,33 @@ require('lazy').setup({
     },
   },
   {
+    -- (GJ)
+    -- LSP for csharp and unity
+    'seblyng/roslyn.nvim',
+    ft = 'cs',
+    ---@module 'roslyn.config'
+    ---@type RoslynNvimConfig
+    opts = {
+      -- your configuration comes here; leave empty for default settings
+      -- NOTE: You must configure `cmd` in `config.cmd` unless you have installed via mason
+    },
+  },
+  {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
     dependencies = {
       -- Automatically install LSPs and related tools to stdpath for Neovim
       -- Mason must be loaded before its dependents so we need to set it up here.
       -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
-      { 'mason-org/mason.nvim', opts = {} },
+      {
+        'mason-org/mason.nvim',
+        opts = {
+          registries = {
+            'github:mason-org/mason-registry',
+            'github:Crashdummyy/mason-registry',
+          },
+        },
+      },
       'mason-org/mason-lspconfig.nvim',
       'WhoIsSethDaniel/mason-tool-installer.nvim',
 
@@ -701,6 +721,9 @@ require('lazy').setup({
             },
           },
         },
+
+        -- (GJ)
+        -- roslyn_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
