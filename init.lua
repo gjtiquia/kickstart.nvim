@@ -107,8 +107,12 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
--- (GJ) disable linewrap
+-- (GJ) my custom stuff
 vim.o.wrap = false
+vim.opt.expandtab = true
+vim.opt.shiftwidth = 4
+vim.opt.tabstop = 4
+vim.opt.autoindent = true
 
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
@@ -662,9 +666,6 @@ require('lazy').setup({
             },
           },
         },
-
-        -- (GJ)
-        -- roslyn_ls = {},
       }
 
       -- Ensure the servers and tools above are installed
