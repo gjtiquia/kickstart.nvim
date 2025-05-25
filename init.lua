@@ -745,6 +745,11 @@ require('lazy').setup({
     },
   },
 
+  { -- (GJ) Code Lens - Show References
+    'VidocqH/lsp-lens.nvim',
+    opts = {},
+  },
+
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
