@@ -744,7 +744,10 @@ require('lazy').setup({
       },
     },
   },
-
+  {
+    -- (GJ) Codelens (for showing references)
+    'markwoodhall/vim-codelens',
+  },
   { -- Autocompletion
     'saghen/blink.cmp',
     event = 'VimEnter',
