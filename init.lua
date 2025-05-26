@@ -540,6 +540,9 @@ require('lazy').setup({
           --  the definition of its *type*, not where it was *defined*.
           map('grt', require('telescope.builtin').lsp_type_definitions, '[G]oto [T]ype Definition')
 
+          -- (GJ) Refresh Codelens
+          map('grl', vim.lsp.codelens.refresh, '[R]efresh Code [L]ens')
+
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
           ---@param method vim.lsp.protocol.Method
@@ -581,6 +584,19 @@ require('lazy').setup({
               end,
             })
           end
+
+          -- (GJ) The following autocommands refreshes the Code Lens
+          -- (reference: https://neovim.io/doc/user/lsp.html#vim.lsp.codelens.refresh())
+          -- Works! Commented because it got quite annoying refreshing constantly and it keep flashes (use grl instead to manually refresh)
+          --
+          -- if client and client_supports_method(client, vim.lsp.protocol.Methods.textDocument_codeLens, event.buf) then
+          --   vim.api.nvim_create_autocmd({ 'BufEnter', 'CursorHold', 'InsertLeave' }, {
+          --     buffer = event.buf,
+          --     callback = function()
+          --       vim.lsp.codelens.refresh { bufnr = 0 }
+          --     end,
+          --   })
+          -- end
 
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them
