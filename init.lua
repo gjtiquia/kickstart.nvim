@@ -890,9 +890,52 @@ require('lazy').setup({
       vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
+  {
+    -- Highlight todo, notes, etc in comments
+    'folke/todo-comments.nvim',
+    event = 'VimEnter',
+    dependencies = { 'nvim-lua/plenary.nvim' },
 
-  -- Highlight todo, notes, etc in comments
-  { 'folke/todo-comments.nvim', event = 'VimEnter', dependencies = { 'nvim-lua/plenary.nvim' }, opts = { signs = false } },
+    -- TODO : this is a todo
+
+    -- TODO this is also a todo
+
+    -- NOTE : this is a note
+
+    -- FIX : this is a fix
+
+    -- ! : this is also a fix
+
+    -- !!! : this is also a fix
+
+    -- FELIX : this is also a fix
+
+    opts = {
+      signs = false,
+      keywords = {
+        FIX = {
+          -- (GJ) wip: the ! doesnt work...
+          alt = { '!', 'FELIX' },
+        },
+      },
+      highlight = {
+        pattern = {
+          -- Default:
+          [[.*<(KEYWORDS)\s*:]],
+
+          -- (GJ)
+          -- from https://github.com/folke/todo-comments.nvim/issues/185
+          -- NOTE(xyz):
+          [[.*<((KEYWORDS)%(\(.{-1,}\))?):]],
+          -- TODO 123:
+          [[.*<((KEYWORDS)%(\s+\d+)?):]],
+
+          -- (GJ) wip: edge case for !
+          -- [[.*<!]],
+        },
+      },
+    },
+  },
 
   { -- Collection of various small independent plugins/modules
     'echasnovski/mini.nvim',
