@@ -537,12 +537,12 @@ require('lazy').setup({
           -- Fuzzy find all the symbols in your current document.
           --  Symbols are things like variables, functions, types, etc.
           -- (GJ) changed keymapping from gO to gro, cuz im always on gr- anyways for other LSP stuff
-          map('gro', require('telescope.builtin').lsp_document_symbols, 'Open Document Symbols')
+          map('gro', require('telescope.builtin').lsp_document_symbols, '[O]pen Document Symbols')
 
           -- Fuzzy find all the symbols in your current workspace.
           --  Similar to document symbols, except searches over your entire project.
           -- (GJ) changed keymapping from gW to grw
-          map('grw', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open Workspace Symbols')
+          map('grw', require('telescope.builtin').lsp_dynamic_workspace_symbols, 'Open [W]orkspace Symbols')
 
           -- Jump to the type of the word under your cursor.
           --  Useful when you're not sure what type a variable is and you want to see
