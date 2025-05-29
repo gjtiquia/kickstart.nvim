@@ -200,7 +200,14 @@ require('lazy').setup({
   -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 
   -- (GJ) startup screen
-  'mhinz/vim-startify',
+  -- 'mhinz/vim-startify',
+  {
+    'goolord/alpha-nvim',
+    dependencies = { 'echasnovski/mini.icons' },
+    config = function()
+      require('alpha').setup(require('alpha.themes.startify').config)
+    end,
+  },
 
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
