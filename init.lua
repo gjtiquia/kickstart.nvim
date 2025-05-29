@@ -114,6 +114,9 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.autoindent = true
 
+-- (GJ) required for bufferline.nvim
+vim.opt.termguicolors = true
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -207,6 +210,14 @@ require('lazy').setup({
     config = function()
       require('alpha').setup(require('alpha.themes.startify').config)
     end,
+  },
+
+  -- (GJ) buffer line (similar to vscode tabs)
+  {
+    'akinsho/bufferline.nvim',
+    version = '*',
+    dependencies = 'nvim-tree/nvim-web-devicons',
+    opts = {},
   },
 
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
