@@ -225,6 +225,9 @@ require('lazy').setup({
     opts = {},
   },
 
+  -- (GJ) git fugitive
+  'tpope/vim-fugitive',
+
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
