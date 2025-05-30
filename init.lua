@@ -465,6 +465,13 @@ require('lazy').setup({
           -- (GJ) enter Telescope in normal mode
           -- so that its easier and quicker to 'j' and 'k' around
           initial_mode = 'normal',
+
+          -- (GJ) so i can scroll top to bottom with j, or else telescope is the only one that scrolls bottom up
+          -- https://github.com/nvim-telescope/telescope.nvim/issues/1933
+          sorting_strategy = 'ascending',
+          layout_config = {
+            prompt_position = 'top',
+          },
         },
         -- pickers = {}
         extensions = {
