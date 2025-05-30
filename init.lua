@@ -750,9 +750,22 @@ require('lazy').setup({
       -- Diagnostic Config
       -- See :help vim.diagnostic.Opts
       vim.diagnostic.config {
+
+        -- (GJ) i want them to show even in insert mode
+        update_in_insert = true,
+
         severity_sort = true,
+
         float = { border = 'rounded', source = 'if_many' },
-        underline = { severity = vim.diagnostic.severity.ERROR },
+
+        underline = {
+          -- (GJ) i want underlines on both warnings and errors
+          severity = {
+            vim.diagnostic.severity.ERROR,
+            vim.diagnostic.severity.WARN,
+          },
+        },
+
         signs = vim.g.have_nerd_font and {
           text = {
             [vim.diagnostic.severity.ERROR] = '󰅚 ',
@@ -761,7 +774,17 @@ require('lazy').setup({
             [vim.diagnostic.severity.HINT] = '󰌶 ',
           },
         } or {},
+
+        -- (GJ) was hoping this will fix the clipping, but virtual lines are still at the end of the line😂😂
+        -- virtual_lines = {
+        --   severity = vim.diagnostic.severity.ERROR,
+        -- },
+
         virtual_text = {
+
+          -- (GJ) its annoying to see even hints that i dun even agree with or intend to follow
+          severity = vim.diagnostic.severity.ERROR,
+
           source = 'if_many',
           spacing = 2,
           format = function(diagnostic)
