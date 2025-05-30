@@ -233,6 +233,66 @@ require('lazy').setup({
   -- (GJ) git fugitive
   'tpope/vim-fugitive',
 
+  -- (GJ) neominimap
+  {
+    'Isrothy/neominimap.nvim',
+    version = 'v3.x.x',
+    lazy = false, -- NOTE: NO NEED to Lazy load
+
+    -- Optional. You can alse set your own keybindings
+    keys = {
+
+      -- (GJ) i customized to be similar to mini.map keymaps
+
+      -- Global Minimap Controls
+      { '<leader>mt', '<cmd>Neominimap Toggle<cr>', desc = '[T]oggle global minimap' },
+      { '<leader>mr', '<cmd>Neominimap Refresh<cr>', desc = '[R]efresh global minimap' },
+      { '<leader>mo', '<cmd>Neominimap Enable<cr>', desc = '[O]pen global minimap' },
+      { '<leader>mc', '<cmd>Neominimap Disable<cr>', desc = '[C]lose global minimap' },
+
+      -- Window-Specific Minimap Controls
+      { '<leader>mWt', '<cmd>Neominimap WinToggle<cr>', desc = '[T]oggle minimap for current window' },
+      { '<leader>mWr', '<cmd>Neominimap WinRefresh<cr>', desc = '[R]efresh minimap for current window' },
+      { '<leader>mWo', '<cmd>Neominimap WinEnable<cr>', desc = '[O]pen minimap for current window' },
+      { '<leader>mWc', '<cmd>Neominimap WinDisable<cr>', desc = '[C]lose minimap for current window' },
+
+      -- Tab-Specific Minimap Controls
+      { '<leader>mTt', '<cmd>Neominimap TabToggle<cr>', desc = '[T]oggle minimap for current tab' },
+      { '<leader>mTr', '<cmd>Neominimap TabRefresh<cr>', desc = '[R]efresh minimap for current tab' },
+      { '<leader>mTo', '<cmd>Neominimap TabEnable<cr>', desc = '[O]pen minimap for current tab' },
+      { '<leader>mTc', '<cmd>Neominimap TabDisable<cr>', desc = '[C]lose minimap for current tab' },
+
+      -- Buffer-Specific Minimap Controls
+      { '<leader>mBt', '<cmd>Neominimap BufToggle<cr>', desc = '[T]oggle minimap for current buffer' },
+      { '<leader>mBr', '<cmd>Neominimap BufRefresh<cr>', desc = '[R]efresh minimap for current buffer' },
+      { '<leader>mBo', '<cmd>Neominimap BufEnable<cr>', desc = '[O]pen minimap for current buffer' },
+      { '<leader>mBc', '<cmd>Neominimap BufDisable<cr>', desc = '[C]lose minimap for current buffer' },
+
+      ---Focus Controls
+      -- { '<leader>mf', '<cmd>Neominimap Focus<cr>', desc = 'Focus on minimap' },
+      -- { '<leader>mu', '<cmd>Neominimap Unfocus<cr>', desc = 'Unfocus minimap' },
+      { '<leader>mf', '<cmd>Neominimap ToggleFocus<cr>', desc = 'Switch [f]ocus on minimap' },
+    },
+
+    init = function()
+      -- The following options are recommended when layout == "float"
+      vim.opt.wrap = false
+      vim.opt.sidescrolloff = 36 -- Set a large value
+
+      --- Put your configuration here
+      ---@type Neominimap.UserConfig
+      vim.g.neominimap = {
+
+        auto_enable = true,
+
+        diagnostic = {
+          -- (GJ) i dont want to show warnings, only errors
+          severity = vim.diagnostic.severity.ERROR,
+        },
+      }
+    end,
+  },
+
   'NMAC427/guess-indent.nvim', -- Detect tabstop and shiftwidth automatically
 
   -- NOTE: Plugins can also be added by using a table,
@@ -332,6 +392,10 @@ require('lazy').setup({
       spec = {
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
+        { '<leader>m', group = '[M]inimap' },
+        { '<leader>mB', group = '[B]uffer' },
+        { '<leader>mW', group = '[W]indow' },
+        { '<leader>mT', group = '[T]ab' },
         { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
       },
     },
@@ -1008,20 +1072,20 @@ require('lazy').setup({
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
 
-      -- (GJ) minimap
-      require('mini.map').setup()
-
-      -- required cuz FiraMono font doesnt support the default symbol
-      -- need to do it here because MiniMap is not defined until the above is loaded
-      MiniMap.config.symbols.encode = MiniMap.gen_encode_symbols.dot '3x2'
-
-      -- minimap keymaps
-      vim.keymap.set('n', '<Leader>mc', MiniMap.close, { desc = '[m]inimap [c]lose' })
-      vim.keymap.set('n', '<Leader>mf', MiniMap.toggle_focus, { desc = '[m]inimap toggle [f]ocus' })
-      vim.keymap.set('n', '<Leader>mo', MiniMap.open, { desc = '[m]inimap [o]pen' })
-      vim.keymap.set('n', '<Leader>mr', MiniMap.refresh, { desc = '[m]inimap [r]efresh' })
-      vim.keymap.set('n', '<Leader>ms', MiniMap.toggle_side, { desc = '[m]inimap toggle [s]ide' })
-      vim.keymap.set('n', '<Leader>mt', MiniMap.toggle, { desc = '[m]inimap [t]oggle' })
+      -- -- (GJ) minimap
+      -- require('mini.map').setup()
+      --
+      -- -- required cuz FiraMono font doesnt support the default symbol
+      -- -- need to do it here because MiniMap is not defined until the above is loaded
+      -- MiniMap.config.symbols.encode = MiniMap.gen_encode_symbols.dot '3x2'
+      --
+      -- -- minimap keymaps
+      -- vim.keymap.set('n', '<Leader>mc', MiniMap.close, { desc = '[m]inimap [c]lose' })
+      -- vim.keymap.set('n', '<Leader>mf', MiniMap.toggle_focus, { desc = '[m]inimap toggle [f]ocus' })
+      -- vim.keymap.set('n', '<Leader>mo', MiniMap.open, { desc = '[m]inimap [o]pen' })
+      -- vim.keymap.set('n', '<Leader>mr', MiniMap.refresh, { desc = '[m]inimap [r]efresh' })
+      -- vim.keymap.set('n', '<Leader>ms', MiniMap.toggle_side, { desc = '[m]inimap toggle [s]ide' })
+      -- vim.keymap.set('n', '<Leader>mt', MiniMap.toggle, { desc = '[m]inimap [t]oggle' })
     end,
   },
   { -- Highlight, edit, and navigate code
