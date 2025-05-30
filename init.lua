@@ -132,6 +132,11 @@ vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<CR>', { desc = '[T]oggle [W]ra
 -- silent = the command executed will not "print". But here we want it to print as we want to know what is in the search
 vim.keymap.set('n', '*', '*N', { noremap = true, silent = false })
 
+-- (GJ) == is annoying that after shifting, my cursor doesnt shift😂 so better just put my cursor at the end of line by default
+-- but this remap doesnt work in ctrl-o one shot normal mode from insert mode... workarounds with <cmd> doesnt work either...
+-- vim.keymap.set('n', '==', "==$", { noremap = true })
+vim.keymap.set('i', '<C-o>==', '<C-o>==<C-o>$', { noremap = true })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
