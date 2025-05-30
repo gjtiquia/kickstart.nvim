@@ -1007,6 +1007,21 @@ require('lazy').setup({
 
       -- ... and there is more!
       --  Check out: https://github.com/echasnovski/mini.nvim
+
+      -- (GJ) minimap
+      require('mini.map').setup()
+
+      -- required cuz FiraMono font doesnt support the default symbol
+      -- need to do it here because MiniMap is not defined until the above is loaded
+      MiniMap.config.symbols.encode = MiniMap.gen_encode_symbols.dot '3x2'
+
+      -- minimap keymaps
+      vim.keymap.set('n', '<Leader>mc', MiniMap.close, { desc = '[m]inimap [c]lose' })
+      vim.keymap.set('n', '<Leader>mf', MiniMap.toggle_focus, { desc = '[m]inimap toggle [f]ocus' })
+      vim.keymap.set('n', '<Leader>mo', MiniMap.open, { desc = '[m]inimap [o]pen' })
+      vim.keymap.set('n', '<Leader>mr', MiniMap.refresh, { desc = '[m]inimap [r]efresh' })
+      vim.keymap.set('n', '<Leader>ms', MiniMap.toggle_side, { desc = '[m]inimap toggle [s]ide' })
+      vim.keymap.set('n', '<Leader>mt', MiniMap.toggle, { desc = '[m]inimap [t]oggle' })
     end,
   },
   { -- Highlight, edit, and navigate code
