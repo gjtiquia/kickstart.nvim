@@ -679,6 +679,7 @@ require('lazy').setup({
 
           -- (GJ) Refresh Codelens
           map('grl', vim.lsp.codelens.refresh, '[R]efresh Code [L]ens')
+          map('grL', vim.lsp.codelens.clear, 'Clear Code [L]ens')
 
           -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
           ---@param client vim.lsp.Client
