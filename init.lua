@@ -137,6 +137,16 @@ vim.keymap.set('n', '*', '*N', { noremap = true, silent = false })
 -- vim.keymap.set('n', '==', "==$", { noremap = true })
 vim.keymap.set('i', '<C-o>==', '<C-o>==<C-o>$', { noremap = true })
 
+-- (GJ) move lines
+-- https://vimtricks.com/p/vimtrick-moving-lines/
+-- commented because they dont work well in insert mode and visual mode😂 will use mini.move instead
+-- vim.keymap.set('n', '<M-j>', '<cmd>m +1<CR>==', { noremap = true, silent = false })
+-- vim.keymap.set('n', '<M-k>', '<cmd>m -2<CR>==', { noremap = true, silent = false })
+-- vim.keymap.set('i', '<M-j>', '<esc><cmd>m +1<CR>==gi', { noremap = true, silent = false })
+-- vim.keymap.set('i', '<M-k>', '<esc><cmd>m -2<CR>==gi', { noremap = true, silent = false })
+-- vim.keymap.set('v', '<M-j>', "<cmd>m '>+1<CR>gv==gv", { noremap = true, silent = false })
+-- vim.keymap.set('v', '<M-k>', "<cmd>m '<-2<CR>gv==gv", { noremap = true, silent = false })
+
 -- Diagnostic keymaps
 -- (GJ) i customized them to be under the group <leader>d, and added some of my own
 -- https://www.reddit.com/r/neovim/comments/w35wvw/how_to_handle_code_diagnostics_that_bleed_off_the/
@@ -168,10 +178,11 @@ vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' }
 --  Use CTRL+<hjkl> to switch between windows
 --
 --  See `:help wincmd` for a list of all window commands
-vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
-vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
-vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
-vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
+-- (GJ) commented because i dont use it and C-hjkl seems too precious to be remapped😂
+-- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
+-- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
+-- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
+-- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
 
 -- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
 -- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
@@ -1104,6 +1115,11 @@ require('lazy').setup({
       -- vim.keymap.set('n', '<Leader>mr', MiniMap.refresh, { desc = '[m]inimap [r]efresh' })
       -- vim.keymap.set('n', '<Leader>ms', MiniMap.toggle_side, { desc = '[m]inimap toggle [s]ide' })
       -- vim.keymap.set('n', '<Leader>mt', MiniMap.toggle, { desc = '[m]inimap [t]oggle' })
+
+      -- (GJ) move lines
+      -- default mappings: <M-hjkl>, M for meta key (alt)
+      -- works in normal mode and visual mode
+      require('mini.move').setup()
     end,
   },
   { -- Highlight, edit, and navigate code
