@@ -127,6 +127,11 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- (GJ) Toggle Wrap
 vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<CR>', { desc = '[T]oggle [W]rap' })
 
+-- (GJ) * is annoying that it always goes to next😂 force it back
+-- noremap = non-recursive, so it executes what N actually is, not what N may be otherwise mapped to
+-- silent = the command executed will not "print". But here we want it to print as we want to know what is in the search
+vim.keymap.set('n', '*', '*N', { noremap = true, silent = false })
+
 -- Diagnostic keymaps
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
 
