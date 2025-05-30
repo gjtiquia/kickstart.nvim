@@ -138,7 +138,17 @@ vim.keymap.set('n', '*', '*N', { noremap = true, silent = false })
 vim.keymap.set('i', '<C-o>==', '<C-o>==<C-o>$', { noremap = true })
 
 -- Diagnostic keymaps
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+-- (GJ) i customized them to be under the group <leader>d, and added some of my own
+-- https://www.reddit.com/r/neovim/comments/w35wvw/how_to_handle_code_diagnostics_that_bleed_off_the/
+-- https://neovim.io/doc/user/deprecated.html#vim.diagnostic.goto_next()
+vim.keymap.set('n', '<leader>dq', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>dd', vim.diagnostic.open_float, { desc = 'Open [D]iagnostic floating window' })
+vim.keymap.set('n', '<leader>dn', function()
+  vim.diagnostic.jump { count = 1, float = true }
+end, { desc = '[N]ext diagnostic' })
+vim.keymap.set('n', '<leader>dp', function()
+  vim.diagnostic.jump { count = -1, float = true }
+end, { desc = '[P]revious diagnostic' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -390,6 +400,7 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
+        { '<leader>d', group = '[D]iagnostics' },
         { '<leader>s', group = '[S]earch' },
         { '<leader>t', group = '[T]oggle' },
         { '<leader>m', group = '[M]inimap' },
@@ -793,7 +804,7 @@ require('lazy').setup({
                 callSnippet = 'Replace',
               },
               -- You can toggle below to ignore Lua_LS's noisy `missing-fields` warnings
-              -- diagnostics = { disable = { 'missing-fields' } },
+              diagnostics = { disable = { 'missing-fields' } },
             },
           },
         },
