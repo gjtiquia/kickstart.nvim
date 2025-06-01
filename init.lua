@@ -1,33 +1,23 @@
 --[[
-What is Kickstart?
+Kickstart.nvim is a starting point for your own configuration.
 
-  Kickstart.nvim is *not* a distribution.
+Lua Language Guide: 10-15min
+- https://learnxinyminutes.com/docs/lua/
 
-  Kickstart.nvim is a starting point for your own configuration.
-    The goal is that you can read every line of code, top-to-bottom, understand
-    what your configuration is doing, and modify it to suit your needs.
+Neovim Lua Guide
+- :help lua-guide
+- (or HTML version): https://neovim.io/doc/user/lua-guide.html
 
-    If you don't know anything about Lua, I recommend taking some time to read through
-    a guide. One possible example which will only take 10-15 minutes:
-      - https://learnxinyminutes.com/docs/lua/
+Neovim Help
+- :help`.
 
-    After understanding a bit more about Lua, you can use `:help lua-guide` as a
-    reference for how Neovim integrates Lua.
-    - :help lua-guide
-    - (or HTML version): https://neovim.io/doc/user/lua-guide.html
-
-Kickstart Guide:
-  Next, run AND READ `:help`.
-    This will open up a help window with some basic information
-    about reading, navigating and searching the builtin help documentation.
-
-    MOST IMPORTANTLY, we provide a keymap "<space>sh" to [s]earch the [h]elp documentation,
-    which is very useful when you're not exactly sure of what you're looking for.
+Search Help
+- <leader>sh
 --]]
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
---  NOTE: Must happen before plugins are loaded (otherwise wrong leader will be used)
+-- Must happen before plugins are loaded (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
 
@@ -36,13 +26,10 @@ vim.g.have_nerd_font = true
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
--- NOTE: You can change these options as you wish!
---  For more options, you can see `:help option-list`
+-- For more options, you can see `:help option-list`
 
 -- Make line numbers default
 vim.o.number = true
--- You can also add relative line numbers, to help with jumping.
---  Experiment for yourself to see if you like it!
 vim.o.relativenumber = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
@@ -60,10 +47,12 @@ vim.schedule(function()
 end)
 
 -- Enable break indent
+-- allows wrapped lines to be continuously indented
 vim.o.breakindent = true
 
 -- Save undo history
-vim.o.undofile = true
+-- (GJ) commented because i find it annoying. i typically want undo to last for the neovim session. have git anyways.
+-- vim.o.undofile = true
 
 -- Case-insensitive searching UNLESS \C or one or more capital letters in the search term
 vim.o.ignorecase = true
@@ -100,7 +89,7 @@ vim.o.inccommand = 'split'
 vim.o.cursorline = true
 
 -- Minimal number of screen lines to keep above and below the cursor.
-vim.o.scrolloff = 10
+vim.o.scrolloff = 15 -- (GJ) originally 10
 
 -- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
 -- instead raise a dialog asking if you wish to save the current file(s)
@@ -137,16 +126,6 @@ vim.keymap.set('n', '*', '*N', { noremap = true, silent = false })
 -- vim.keymap.set('n', '==', "==$", { noremap = true })
 vim.keymap.set('i', '<C-o>==', '<C-o>==<C-o>$', { noremap = true })
 
--- (GJ) move lines
--- https://vimtricks.com/p/vimtrick-moving-lines/
--- commented because they dont work well in insert mode and visual mode😂 will use mini.move instead
--- vim.keymap.set('n', '<M-j>', '<cmd>m +1<CR>==', { noremap = true, silent = false })
--- vim.keymap.set('n', '<M-k>', '<cmd>m -2<CR>==', { noremap = true, silent = false })
--- vim.keymap.set('i', '<M-j>', '<esc><cmd>m +1<CR>==gi', { noremap = true, silent = false })
--- vim.keymap.set('i', '<M-k>', '<esc><cmd>m -2<CR>==gi', { noremap = true, silent = false })
--- vim.keymap.set('v', '<M-j>', "<cmd>m '>+1<CR>gv==gv", { noremap = true, silent = false })
--- vim.keymap.set('v', '<M-k>', "<cmd>m '<-2<CR>gv==gv", { noremap = true, silent = false })
-
 -- Diagnostic keymaps
 -- (GJ) i customized them to be under the group <leader>d, and added some of my own
 -- https://www.reddit.com/r/neovim/comments/w35wvw/how_to_handle_code_diagnostics_that_bleed_off_the/
@@ -164,31 +143,15 @@ end, { desc = '[P]revious diagnostic' })
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
 -- is not what someone will guess without a bit more experience.
 --
--- NOTE: This won't work in all terminal emulators/tmux/etc. Try your own mapping
+-- This won't work in all terminal emulators/tmux/etc. Try your own mapping
 -- or just use <C-\><C-n> to exit terminal mode
 vim.keymap.set('t', '<Esc><Esc>', '<C-\\><C-n>', { desc = 'Exit terminal mode' })
 
 -- TIP: Disable arrow keys in normal mode
--- vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
--- vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
--- vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
--- vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
-
--- Keybinds to make split navigation easier.
---  Use CTRL+<hjkl> to switch between windows
---
---  See `:help wincmd` for a list of all window commands
--- (GJ) commented because i dont use it and C-hjkl seems too precious to be remapped😂
--- vim.keymap.set('n', '<C-h>', '<C-w><C-h>', { desc = 'Move focus to the left window' })
--- vim.keymap.set('n', '<C-l>', '<C-w><C-l>', { desc = 'Move focus to the right window' })
--- vim.keymap.set('n', '<C-j>', '<C-w><C-j>', { desc = 'Move focus to the lower window' })
--- vim.keymap.set('n', '<C-k>', '<C-w><C-k>', { desc = 'Move focus to the upper window' })
-
--- NOTE: Some terminals have colliding keymaps or are not able to send distinct keycodes
--- vim.keymap.set("n", "<C-S-h>", "<C-w>H", { desc = "Move window to the left" })
--- vim.keymap.set("n", "<C-S-l>", "<C-w>L", { desc = "Move window to the right" })
--- vim.keymap.set("n", "<C-S-j>", "<C-w>J", { desc = "Move window to the lower" })
--- vim.keymap.set("n", "<C-S-k>", "<C-w>K", { desc = "Move window to the upper" })
+vim.keymap.set('n', '<left>', '<cmd>echo "Use h to move!!"<CR>')
+vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
+vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
+vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
@@ -229,9 +192,9 @@ rtp:prepend(lazypath)
 --  To update plugins you can run
 --    :Lazy update
 --
--- NOTE: Here is where you install your plugins.
+-- Here is where you install your plugins.
 require('lazy').setup({
-  -- NOTE: Plugins can be added with a link (or for a github repo: 'owner/repo' link).
+  -- Plugins can be added with a link (or for a github repo: 'owner/repo' link).
 
   -- (GJ) startup screen
   -- 'mhinz/vim-startify',
