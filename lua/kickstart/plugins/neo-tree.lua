@@ -21,6 +21,11 @@ return {
           ['\\'] = 'close_window',
         },
       },
+      filtered_items = {
+        hide_by_pattern = {
+          '*.meta',
+        },
+      },
     },
   },
 }
