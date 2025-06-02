@@ -162,6 +162,11 @@ vim.keymap.set('i', '<down>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
 -- (GJ) remap up to previous command
 vim.keymap.set('n', '<up>', ':<up>', { noremap = true })
 
+-- (GJ) auto-center after jumps
+vim.keymap.set('n', '<c-d>', '<c-d>zz', { noremap = true })
+vim.keymap.set('n', '<c-u>', '<c-u>zz', { noremap = true })
+vim.keymap.set('n', 'G', 'Gzz', { noremap = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
