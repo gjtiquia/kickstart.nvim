@@ -153,6 +153,15 @@ vim.keymap.set('n', '<right>', '<cmd>echo "Use l to move!!"<CR>')
 vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
+-- (GJ): Disable arrow keys in insert mode too
+vim.keymap.set('i', '<left>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
+vim.keymap.set('i', '<right>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
+vim.keymap.set('i', '<up>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
+vim.keymap.set('i', '<down>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
+
+-- (GJ) remap up to previous command
+vim.keymap.set('n', '<up>', ':<up>', { noremap = true })
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
