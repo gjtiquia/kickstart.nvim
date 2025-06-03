@@ -154,10 +154,11 @@ vim.keymap.set('n', '<up>', '<cmd>echo "Use k to move!!"<CR>')
 vim.keymap.set('n', '<down>', '<cmd>echo "Use j to move!!"<CR>')
 
 -- (GJ): Disable arrow keys in insert mode too
-vim.keymap.set('i', '<left>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
-vim.keymap.set('i', '<right>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
-vim.keymap.set('i', '<up>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
-vim.keymap.set('i', '<down>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
+-- ultimately commented😂😂 too many off-by-one situations in insert mode, does NOT make sense to escape and move lol, breaks flow
+-- vim.keymap.set('i', '<left>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
+-- vim.keymap.set('i', '<right>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
+-- vim.keymap.set('i', '<up>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
+-- vim.keymap.set('i', '<down>', '<cmd>echo "No arrow keys in insert mode!"<CR>')
 
 -- (GJ) remap up to previous command
 vim.keymap.set('n', '<up>', ':<up>', { noremap = true })
@@ -166,6 +167,16 @@ vim.keymap.set('n', '<up>', ':<up>', { noremap = true })
 vim.keymap.set('n', '<c-d>', '<c-d>zz', { noremap = true })
 vim.keymap.set('n', '<c-u>', '<c-u>zz', { noremap = true })
 vim.keymap.set('n', 'G', 'Gzz', { noremap = true })
+
+-- (GJ) commenting keymaps
+-- weird that <c-/> does not work for forward slash😂 need to use _, because in insert mode <c-/> gives ^_, can tell nvim registers it as _
+-- hence ctrl + shift + - actually works too here
+-- https://superuser.com/questions/1571587/is-it-possible-to-map-control-forward-slash-with-vim
+-- set remap = true because apparently gcc IS a mapping!
+-- https://www.reddit.com/r/neovim/comments/1d278fz/keymap_comment_nvim_010/
+-- i also made the cursor move to the end of the line, dunno why that felt more intuitive to me
+vim.keymap.set('n', '<c-_>', 'gcc$', { remap = true })
+vim.keymap.set('i', '<c-_>', '<esc>gccA', { remap = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
