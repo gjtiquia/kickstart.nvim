@@ -545,6 +545,9 @@ require('lazy').setup({
     opts = {
       -- your configuration comes here; leave empty for default settings
       -- You must configure `cmd` in `config.cmd` unless you have installed via mason
+
+      -- (GJ) fix roslyn not working on newly created files
+      filewatching = 'roslyn',
     },
   },
   {
