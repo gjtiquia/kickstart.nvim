@@ -177,7 +177,7 @@ vim.keymap.set('n', 'G', 'Gzz', { noremap = true })
 -- i also made the cursor move to the end of the line, dunno why that felt more intuitive to me
 -- and for visual mode, retain the last selection
 vim.keymap.set('n', '<c-_>', 'gcc$', { remap = true })
-vim.keymap.set('i', '<c-_>', '<esc>gcca', { remap = true })
+vim.keymap.set('i', '<c-_>', '<esc>gccA', { remap = true })
 vim.keymap.set('v', '<c-_>', 'gcgv', { remap = true })
 
 -- (GJ)
