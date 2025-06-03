@@ -120,6 +120,7 @@ vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<CR>', { desc = '[T]oggle [W]ra
 -- noremap = non-recursive, so it executes what N actually is, not what N may be otherwise mapped to
 -- silent = the command executed will not "print". But here we want it to print as we want to know what is in the search
 vim.keymap.set('n', '*', '*N', { noremap = true, silent = false })
+-- vim.keymap.set('v', '*', '*N', { noremap = true, silent = false }) -- not sure why this doesnt work lol
 
 -- (GJ) == is annoying that after shifting, my cursor doesnt shift😂 so better just put my cursor at the end of line by default
 -- but this remap doesnt work in ctrl-o one shot normal mode from insert mode... workarounds with <cmd> doesnt work either...
