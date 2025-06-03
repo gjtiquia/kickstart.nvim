@@ -1148,6 +1148,27 @@ require('lazy').setup({
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
   },
 
+  -- (GJ) oil - file operations on a buffer
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      -- (GJ) i dun want to give up netrw just yet
+      -- want to explicitly open with :Oil when i need it
+      default_file_explorer = false,
+      keymaps = {
+        -- (GJ) a lot of tools exit with q, this makes it more intuitive
+        ['q'] = { 'actions.close', mode = 'n' },
+      },
+    },
+    -- Optional dependencies
+    -- dependencies = { { 'echasnovski/mini.icons', opts = {} } },
+    dependencies = { 'nvim-tree/nvim-web-devicons' }, -- use if you prefer nvim-web-devicons
+    -- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+    lazy = false,
+  },
+
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
   -- init.lua. If you want these files, they are in the repository, so you can just download them and
   -- place them in the correct locations.

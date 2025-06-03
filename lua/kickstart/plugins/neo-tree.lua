@@ -16,16 +16,23 @@ return {
   },
   opts = {
     filesystem = {
+
       window = {
         mappings = {
           ['\\'] = 'close_window',
         },
       },
+
       filtered_items = {
         hide_by_pattern = {
           '*.meta',
         },
       },
+
+      -- (GJ) i dont want to override netrw when i do `:e .`
+      -- neo-tree for me is strictly for exploring project structure
+      -- file operations will be via oil
+      hijack_netrw_behavior = 'disabled',
     },
   },
 }
