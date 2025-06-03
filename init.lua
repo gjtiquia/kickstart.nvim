@@ -180,6 +180,12 @@ vim.keymap.set('n', '<c-_>', 'gcc$', { remap = true })
 vim.keymap.set('i', '<c-_>', '<esc>gcca', { remap = true })
 vim.keymap.set('v', '<c-_>', 'gcgv', { remap = true })
 
+-- (GJ)
+-- [[ Editor Setup ]]
+if vim.loop.os_uname().sysname == 'Windows_NT' then
+  vim.o.shell = 'powershell.exe'
+end
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
