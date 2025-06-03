@@ -175,8 +175,10 @@ vim.keymap.set('n', 'G', 'Gzz', { noremap = true })
 -- set remap = true because apparently gcc IS a mapping!
 -- https://www.reddit.com/r/neovim/comments/1d278fz/keymap_comment_nvim_010/
 -- i also made the cursor move to the end of the line, dunno why that felt more intuitive to me
+-- and for visual mode, retain the last selection
 vim.keymap.set('n', '<c-_>', 'gcc$', { remap = true })
-vim.keymap.set('i', '<c-_>', '<esc>gccA', { remap = true })
+vim.keymap.set('i', '<c-_>', '<esc>gcca', { remap = true })
+vim.keymap.set('v', '<c-_>', 'gcgv', { remap = true })
 
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
