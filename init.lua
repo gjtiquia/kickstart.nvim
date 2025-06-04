@@ -1094,12 +1094,50 @@ require('lazy').setup({
       -- set use_icons to true if you have a Nerd Font
       statusline.setup { use_icons = vim.g.have_nerd_font }
 
-      -- You can configure sections in the statusline by overriding their
-      -- default behavior. For example, here we set the section for
-      -- cursor location to LINE:COLUMN
+      --[[ (GJ)
+      by default it shows
+      - mode highlight group
+        - mode
+      - dev info group
+        - git branch
+        - diffs
+        - diagnostics
+        - lsp
+      - filename group
+        - filename
+      - fileinfo group
+        - fileinfo
+      - mode highlight group
+        - search, location
+      --]]
+
+      -- You can configure sections in the statusline by overriding their default behavior.
+
+      -- (GJ) i dont need to see this
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_diff = function()
+        return ''
+      end
+
+      -- (GJ) i dont need to see this
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_diagnostics = function()
+        return ''
+      end
+
+      -- (GJ) i dont need to see this
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_lsp = function()
+        return ''
+      end
+
+      -- For example, here we set the section for cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_location = function()
-        return '%2l:%-2v'
+        -- (GJ) i do very much prefer this over the default
+        -- return '%2l:%-2v'
+        -- (GJ) but i dont need to see horizontally where i am😂
+        return 'L%2l ' .. vim.fn.strftime '%H:%M'
       end
 
       -- ... and there is more!
