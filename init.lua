@@ -470,6 +470,9 @@ require('lazy').setup({
           layout_config = {
             prompt_position = 'top',
           },
+
+          -- (GJ) ignore all .meta files (see :help telescope.defaults.file_ignore_patterns)
+          file_ignore_patterns = { '%.meta' },
         },
 
         -- pickers = {}
