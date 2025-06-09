@@ -841,6 +841,7 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
+        'roslyn', -- (GJ) Used to format C# code
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -1167,6 +1168,8 @@ require('lazy').setup({
       -- vim.keymap.set('n', '<Leader>mt', MiniMap.toggle, { desc = '[m]inimap [t]oggle' })
 
       -- (GJ) move lines
+      -- (in mac the meta key is a bit problematic, especially with some terminals, just keep that in mind)
+      -- (can consider remapping if needed)
       -- default mappings: <M-hjkl>, M for meta key (alt)
       -- works in normal mode and visual mode
       require('mini.move').setup()
