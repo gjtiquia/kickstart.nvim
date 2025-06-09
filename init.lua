@@ -475,6 +475,9 @@ require('lazy').setup({
 
           -- (GJ) ignore all .meta files (see :help telescope.defaults.file_ignore_patterns)
           file_ignore_patterns = { '%.meta' },
+
+          -- (GJ) cuz hard to see long filepaths
+          path_display = { 'filename_first', 'truncate' },
         },
 
         -- pickers = {}
