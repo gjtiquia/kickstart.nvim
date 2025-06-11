@@ -183,6 +183,9 @@ vim.keymap.set('n', '<c-_>', 'gcc$', { remap = true })
 vim.keymap.set('i', '<c-_>', '<esc>gccA', { remap = true })
 vim.keymap.set('v', '<c-_>', 'gcgv', { remap = true })
 
+-- (GJ) select all keymap
+vim.keymap.set('n', '<c-a>', 'ggVGo', { noremap = true })
+
 -- (GJ)
 -- [[ Editor Setup ]]
 if vim.loop.os_uname().sysname == 'Windows_NT' then
