@@ -141,6 +141,9 @@ end, { desc = '[N]ext diagnostic' })
 vim.keymap.set('n', '<leader>dp', function()
   vim.diagnostic.jump { count = -1, float = true }
 end, { desc = '[P]revious diagnostic' })
+vim.keymap.set('n', '<leader>dt', function()
+  vim.diagnostic.enable(not vim.diagnostic.is_enabled())
+end, { desc = '[T]oggle diagnostics' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
