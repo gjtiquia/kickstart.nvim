@@ -975,10 +975,13 @@ require('lazy').setup({
         -- (GJ) force show the completion menu even if no keys are inserted yet
         ['<C-I>'] = {
           function(cmp)
-            print 'cmp.show()'
+            print '<C-I> cmp.show()'
             cmp.show()
           end,
         },
+
+        -- (GJ) disable tabs, i dun like tab doing cmp.show(), and sometimes i do want to insert tab character
+        ['<Tab>'] = {},
       },
 
       appearance = {
