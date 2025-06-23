@@ -834,9 +834,24 @@ require('lazy').setup({
         },
 
         -- (GJ)
+        -- npm i -g vscode-langservers-extracted
         html = {},
         cssls = {},
         jsonls = {},
+
+        -- npm install -g typescript typescript-language-server
+        ts_ls = {},
+
+        -- npm install -g @astrojs/language-server
+        astro = {},
+
+        -- npm install -g @tailwindcss/language-server
+        tailwindcss = {},
+
+        -- sudo apt install shellcheck
+        -- go install mvdan.cc/sh/v3/cmd/shfmt@latest
+        -- npm i -g bash-language-server
+        bashls = {},
       }
 
       -- Ensure the servers and tools above are installed
