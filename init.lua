@@ -848,6 +848,9 @@ require('lazy').setup({
         -- npm install -g @tailwindcss/language-server
         tailwindcss = {},
 
+        -- npm install -g emmet-ls
+        emmet_ls = {},
+
         -- sudo apt install shellcheck
         -- go install mvdan.cc/sh/v3/cmd/shfmt@latest
         -- npm i -g bash-language-server
@@ -1253,6 +1256,10 @@ require('lazy').setup({
         keymaps = {
           -- (GJ) a lot of tools exit with q, this makes it more intuitive
           ['q'] = { 'actions.close', mode = 'n' },
+        },
+        view_options = {
+          -- (GJ) i want to see all hidden files
+          show_hidden = true,
         },
       }
       require('oil').setup(opts)
