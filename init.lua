@@ -348,7 +348,8 @@ require('lazy').setup({
       ---@type Neominimap.UserConfig
       vim.g.neominimap = {
 
-        auto_enable = true,
+        -- (GJ) i realize i dont use it that often, better toggle only when i need it
+        auto_enable = false,
 
         diagnostic = {
           -- (GJ) i dont want to show warnings, only errors
@@ -1175,13 +1176,21 @@ require('lazy').setup({
         return ''
       end
 
+      -- (GJ) i dont need to see this
+      ---@diagnostic disable-next-line: duplicate-set-field
+      statusline.section_fileinfo = function()
+        return ''
+      end
+
       -- For example, here we set the section for cursor location to LINE:COLUMN
       ---@diagnostic disable-next-line: duplicate-set-field
       statusline.section_location = function()
         -- (GJ) i do very much prefer this over the default
         -- return '%2l:%-2v'
         -- (GJ) but i dont need to see horizontally where i am😂
-        return 'L%2l ' .. vim.fn.strftime '%H:%M'
+        -- (GJ) and i dont want the awkward space in line number
+        -- (GJ) and i want to see the time (rather here than tmux cuz, there's no tmux in powershell haha)
+        return 'L%1l ' .. vim.fn.strftime '%H:%M'
       end
 
       -- ... and there is more!
