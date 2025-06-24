@@ -1283,24 +1283,28 @@ require('lazy').setup({
   -- place them in the correct locations.
 
   -- NOTE: Next step on your Neovim journey: Add/Configure additional plugins for Kickstart
-  --
+
   --  Here are some example plugins that I've included in the Kickstart repository.
   --  Uncomment any of the lines below to enable them (you will need to restart nvim).
-  --
+
   -- require 'kickstart.plugins.debug',
-  --
+
+  -- (GJ) i thought this helps keep me indented, but it just adds guide lines which are quite noisy tbh
   -- require 'kickstart.plugins.indent_line',
-  --
+
   -- require 'kickstart.plugins.lint',
-  --
+
   -- (GJ) this automatically does the { } thing😂
   require 'kickstart.plugins.autopairs',
-  --
+
+  -- (GJ) auto close tags! same author as autopairs!
+  require 'plugins.autotag',
+
   -- (GJ) i see this a lot in reddit! sidebar file manager!
   -- turns out to have a lot of good features! gotta study the help menu and add the keymaps😂
   -- keymap to open file manager: '\'
   require 'kickstart.plugins.neo-tree',
-  --
+
   -- (GJ) this has SOOO MANY git keymaps and blame info!!
   -- notable keymaps: [c or ]c for next/prev git change, and <leader>h for more, and <leader>t for some toggles
   require 'kickstart.plugins.gitsigns', -- adds gitsigns recommend keymaps
@@ -1316,6 +1320,7 @@ require('lazy').setup({
   -- In normal mode type `<space>sh` then write `lazy.nvim-plugin`
   -- you can continue same window with `<space>sr` which resumes last telescope search
 }, {
+
   ui = {
     -- If you are using a Nerd Font: set icons to an empty table which will use the
     -- default lazy.nvim defined Nerd Font icons, otherwise define a unicode icons table
