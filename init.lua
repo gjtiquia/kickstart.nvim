@@ -180,6 +180,7 @@ vim.keymap.set('n', 'G', 'Gzz', { noremap = true })
 -- (GJ) commenting keymaps
 -- weird that <c-/> does not work for forward slash😂 need to use _, because in insert mode <c-/> gives ^_, can tell nvim registers it as _
 -- hence ctrl + shift + - actually works too here
+-- (tho sometimes... in insert mode it does indeed give /)
 -- https://superuser.com/questions/1571587/is-it-possible-to-map-control-forward-slash-with-vim
 -- set remap = true because apparently gcc IS a mapping!
 -- https://www.reddit.com/r/neovim/comments/1d278fz/keymap_comment_nvim_010/
@@ -188,6 +189,9 @@ vim.keymap.set('n', 'G', 'Gzz', { noremap = true })
 vim.keymap.set('n', '<c-_>', 'gcc$', { remap = true })
 vim.keymap.set('i', '<c-_>', '<esc>gccA', { remap = true })
 vim.keymap.set('v', '<c-_>', 'gcgv', { remap = true })
+vim.keymap.set('n', '<c-/>', 'gcc$', { remap = true })
+vim.keymap.set('i', '<c-/>', '<esc>gccA', { remap = true })
+vim.keymap.set('v', '<c-/>', 'gcgv', { remap = true })
 
 -- (GJ) select all keymap
 vim.keymap.set('n', '<c-a>', 'ggVGo', { noremap = true })
