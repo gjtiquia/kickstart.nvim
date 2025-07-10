@@ -1034,7 +1034,6 @@ require('lazy').setup({
 
           -- (GJ) need border
           window = { border = 'rounded' },
-          menu = { border = 'rounded' },
         },
       },
 
