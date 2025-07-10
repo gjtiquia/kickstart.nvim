@@ -1066,11 +1066,12 @@ require('lazy').setup({
     },
   },
 
-  { -- You can easily change to a different colorscheme.
-    -- Change the name of the colorscheme plugin below, and then
-    -- change the command in the config to whatever the name of that colorscheme is.
-    --
-    -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  -- You can easily change to a different colorscheme.
+  -- Change the name of the colorscheme plugin below, and then
+  -- change the command in the config to whatever the name of that colorscheme is.
+  --
+  -- If you want to see what colorschemes are already installed, you can use `:Telescope colorscheme`.
+  {
     'folke/tokyonight.nvim',
     priority = 1000, -- Make sure to load this before all the other start plugins.
     config = function()
@@ -1084,9 +1085,21 @@ require('lazy').setup({
       -- Load the colorscheme here.
       -- Like many other themes, this one has different styles, and you could load
       -- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
-      vim.cmd.colorscheme 'tokyonight-night'
+
+      -- (GJ) commented to set rose-pine as colorscheme
+      -- vim.cmd.colorscheme 'tokyonight-night'
     end,
   },
+  {
+    -- (GJ) rose pine, cuz im starting to get tired of green accents in tokyonight (nvim, lg, ghostty)
+    'rose-pine/neovim',
+    priority = 1000, -- Make sure to load this before all the other start plugins.
+    name = 'rose-pine',
+    config = function()
+      vim.cmd.colorscheme 'rose-pine'
+    end,
+  },
+
   {
     -- Highlight todo, notes, etc in comments
     'folke/todo-comments.nvim',
