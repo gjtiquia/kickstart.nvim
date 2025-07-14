@@ -119,6 +119,19 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 -- (GJ) Toggle Wrap
 vim.keymap.set('n', '<leader>tw', '<cmd>set wrap!<CR>', { desc = '[T]oggle [W]rap' })
 
+-- (GJ) Toggle Rose Pine Dawn/Moon theme
+vim.keymap.set('n', '<leader>tr', function()
+  if vim.g.colors_name ~= 'rose-pine' then
+    return
+  end
+
+  if vim.o.background == 'dark' then
+    vim.cmd.colorscheme 'rose-pine-dawn'
+  elseif vim.o.background == 'light' then
+    vim.cmd.colorscheme 'rose-pine-moon'
+  end
+end, { desc = '[T]oggle [R]ose Pine Dawn/Moon' })
+
 -- (GJ) * is annoying that it always goes to next😂 force it back
 -- see :h star
 -- noremap = non-recursive, so it executes what N actually is, not what N may be otherwise mapped to
@@ -1100,9 +1113,11 @@ require('lazy').setup({
     priority = 1000, -- Make sure to load this before all the other start plugins.
     name = 'rose-pine',
     config = function()
+      -- TODO : best if can detect from system if is currently light/dark mode and set accordingly
+
       -- vim.cmd.colorscheme 'rose-pine'
-      vim.cmd.colorscheme 'rose-pine-main'
-      -- vim.cmd.colorscheme 'rose-pine-moon'
+      -- vim.cmd.colorscheme 'rose-pine-main'
+      vim.cmd.colorscheme 'rose-pine-moon'
       -- vim.cmd.colorscheme 'rose-pine-dawn'
     end,
   },
