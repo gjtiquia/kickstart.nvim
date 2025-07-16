@@ -1242,10 +1242,15 @@ require('lazy').setup({
       statusline.section_location = function()
         -- (GJ) i do very much prefer this over the default
         -- return '%2l:%-2v'
+
         -- (GJ) but i dont need to see horizontally where i am😂
         -- (GJ) and i dont want the awkward space in line number
         -- (GJ) and i want to see the time (rather here than tmux cuz, there's no tmux in powershell haha)
-        return 'L%1l ' .. vim.fn.strftime '%H:%M'
+        -- return 'L%1l ' .. vim.fn.strftime '%H:%M'
+
+        -- (GJ) now i just want to see the line numbers cuz, im on linux with tmux more often now haha
+        -- (GJ) and i prefer seeing date and time with tmux
+        return 'L%1l'
       end
 
       -- ... and there is more!
