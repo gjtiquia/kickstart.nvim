@@ -496,8 +496,16 @@ require('lazy').setup({
           -- (GJ) so i can scroll top to bottom with j, or else telescope is the only one that scrolls bottom up
           -- https://github.com/nvim-telescope/telescope.nvim/issues/1933
           sorting_strategy = 'ascending',
+
+          -- (GJ) often cannot see the full preview if split horizontally
+          layout_strategy = 'vertical',
+
           layout_config = {
             prompt_position = 'top',
+
+            -- (GJ) for split vertical
+            -- https://github.com/nvim-telescope/telescope.nvim/issues/1903
+            mirror = true,
           },
 
           -- (GJ) ignore all .meta files (see :help telescope.defaults.file_ignore_patterns)
