@@ -29,7 +29,6 @@ you can check if a dependency is installed with `type` (eg. `type git`)
 - [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
 - npm: `nvm install node`
 
-
 ### Install Kickstart
 
 > [!NOTE]
@@ -74,6 +73,10 @@ nvim
 That's it! Lazy will install all the plugins you have. Use `:Lazy` to view
 the current plugin status. Hit `q` to close the window.
 
+if ever you mess up, you can always try again with
+```bash
+rm -rf ~/.local/share/nvim/
+```
 
 ### FAQ
 
