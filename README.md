@@ -29,6 +29,9 @@ you can check if a dependency is installed with `type` (eg. `type git`)
 - [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
 - npm: `nvm install node`
 
+#### Language Setup: C#
+- [dotnet](https://dotnet.microsoft.com/en-us/download)
+
 ### Install Kickstart
 
 > [!NOTE]
