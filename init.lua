@@ -103,6 +103,11 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.autoindent = true
 
+-- (GJ) :set backupcopy=yes
+-- fixes problems with file watchers and hot reload
+-- see bun and hono issue: https://github.com/oven-sh/bun/issues/17497
+vim.o.backupcopy = 'yes'
+
 -- (GJ) required for bufferline.nvim
 vim.opt.termguicolors = true
 
