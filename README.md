@@ -27,7 +27,9 @@ you can check if a dependency is installed with `type` (eg. `type git`)
 
 #### Language Setup: Typescript
 - [nvm](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
-- npm: `nvm install node`
+- node and npm: `nvm install node`
+
+On startup it should download all the required LSPs, see `:mes`
 
 #### Language Setup: C#
 - [dotnet](https://dotnet.microsoft.com/en-us/download)
