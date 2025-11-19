@@ -31,6 +31,10 @@ you can check if a dependency is installed with `type` (eg. `type git`)
 
 On startup it should download all the required LSPs, see `:mes`
 
+Your project may need to install `prettier` as a dev dependency in order for the formatting to work
+
+If you are on Astro, you may also need the `prettier-plugin-astro` and [further setup](https://docs.astro.build/en/editor-setup/#prettier) in the `.prettierrc`
+
 #### Language Setup: C#
 - [dotnet](https://dotnet.microsoft.com/en-us/download)
 
