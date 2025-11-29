@@ -850,13 +850,6 @@ require('lazy').setup({
         -- pyright = {},
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-        --
-        -- Some languages (like typescript) have entire language plugins that can be useful:
-        --    https://github.com/pmizio/typescript-tools.nvim
-        --
-        -- But for many setups, the LSP (`ts_ls`) will work just fine
-        -- ts_ls = {},
-        --
 
         lua_ls = {
           -- cmd = { ... },
@@ -874,7 +867,7 @@ require('lazy').setup({
         },
 
         -- (GJ)
-        -- npm i -g vscode-langservers-extracted
+        -- npm install -g vscode-langservers-extracted
         html = {},
         cssls = {},
         jsonls = {},
@@ -893,7 +886,7 @@ require('lazy').setup({
 
         -- sudo apt install shellcheck
         -- go install mvdan.cc/sh/v3/cmd/shfmt@latest
-        -- npm i -g bash-language-server
+        -- npm install -g bash-language-server
         bashls = {},
       }
 
@@ -973,7 +966,7 @@ require('lazy').setup({
         -- javascript = { 'prettierd', 'prettier', stop_after_first = true },
 
         -- (GJ) https://www.josean.com/posts/neovim-linting-and-formatting
-        -- have prettier installed in node_modules
+        -- have prettier installed in node_modules in your project
         javascript = { 'prettier' },
         typescript = { 'prettier' },
         javascriptreact = { 'prettier' },
