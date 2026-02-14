@@ -846,7 +846,12 @@ require('lazy').setup({
       --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
       local servers = {
         -- clangd = {},
-        -- gopls = {},
+
+        -- (GJ) i see it here originally so i simply uncommented it!
+        -- docs: https://go.dev/gopls/editor/vim#neovim
+        -- works out-of-the-box! intellisense, formatting etc
+        gopls = {},
+
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
 
