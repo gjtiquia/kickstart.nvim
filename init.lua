@@ -892,6 +892,10 @@ require('lazy').setup({
         -- add basedpyright in project dev dependencies
         -- uv add --dev basedpyright
         basedpyright = {},
+
+        -- add ruff in project dev dependencies
+        -- uv add --dev ruff
+        ruff = {},
       }
 
       -- Ensure the servers and tools above are installed
@@ -978,6 +982,17 @@ require('lazy').setup({
         typescript = { 'prettier' },
         javascriptreact = { 'prettier' },
         typescriptreact = { 'prettier' },
+
+        -- (GJ) https://docs.astral.sh/ruff/editors/setup/#neovim
+        -- have ruff installed in dev dependencies in your project
+        python = {
+          -- To fix auto-fixable lint errors.
+          'ruff_fix',
+          -- To run the Ruff formatter.
+          'ruff_format',
+          -- To organize the imports.
+          'ruff_organize_imports',
+        },
       },
     },
   },
