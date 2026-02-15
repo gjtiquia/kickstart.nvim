@@ -80,7 +80,8 @@ vim.o.splitbelow = true
 --   See `:help lua-options`
 --   and `:help lua-options-guide`
 vim.o.list = true
-vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+-- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+vim.opt.listchars = { tab = '  ', trail = '·', nbsp = '␣' } -- (GJ) blank for tabs because golang enforces tabs -- TODO : should change based on file extension
 
 -- Preview substitutions live, as you type!
 vim.o.inccommand = 'split'
@@ -514,7 +515,7 @@ require('lazy').setup({
           },
 
           -- (GJ) ignore all .meta files (see :help telescope.defaults.file_ignore_patterns)
-          file_ignore_patterns = { '%.meta' },
+          -- file_ignore_patterns = { '%.meta' },
 
           -- (GJ) cuz hard to see long filepaths
           path_display = { 'filename_first', 'truncate' },
