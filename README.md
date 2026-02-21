@@ -38,6 +38,9 @@ If you are on Astro, you may also need the `prettier-plugin-astro` and [further 
 #### Language Setup: C#
 - [dotnet](https://dotnet.microsoft.com/en-us/download)
 
+#### Language Setup: Go
+- [go](https://go.dev/doc/install)
+
 ### Install Kickstart
 
 > [!NOTE]
