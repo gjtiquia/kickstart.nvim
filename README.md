@@ -83,8 +83,14 @@ Start Neovim
 nvim
 ```
 
-That's it! Lazy will install all the plugins you have. Use `:Lazy` to view
-the current plugin status. Hit `q` to close the window.
+That's it! Lazy will install all the plugins you have. 
+
+Use `:mes` to view all the logs, especially as the LSPs are installing
+- dont worry if you have not completed the language setup yet, you can always setup the language again later and it will install the LSPs later
+
+Use `:Lazy` to view the current plugin status. 
+
+Hit `q` to close the window.
 
 if ever you mess up, you can always try again with
 ```bash
