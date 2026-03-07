@@ -138,19 +138,6 @@ vim.keymap.set('n', '<leader>tr', function()
   end
 end, { desc = '[T]oggle [R]ose Pine Dawn/Moon' })
 
--- (GJ) Toggle github copilot
-vim.keymap.set('n', '<leader>tt', function()
-  local enabled = vim.g.copilot_enabled ~= 0
-
-  if enabled then
-    vim.cmd 'Copilot disable'
-  else
-    vim.cmd 'Copilot enable'
-  end
-
-  vim.notify('GitHub Copilot ' .. (enabled and 'disabled' or 'enabled'))
-end, { desc = '[T]oggle GitHub Copilot [T]ab' })
-
 -- (GJ) * is annoying that it always goes to next😂 force it back
 -- see :h star
 -- noremap = non-recursive, so it executes what N actually is, not what N may be otherwise mapped to
@@ -179,6 +166,26 @@ end, { desc = '[P]revious diagnostic' })
 vim.keymap.set('n', '<leader>dt', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = '[T]oggle diagnostics' })
+
+-- (GJ) GitHub Copilot keymaps
+-- lol i know i tried to group them under <leader>c but that doesnt work because the keymaps are insert mode, so i just put the toggle under <leader>ct for now
+vim.keymap.set('n', '<leader>ct', function()
+  local enabled = vim.g.copilot_enabled ~= 0
+
+  if enabled then
+    vim.cmd 'Copilot disable'
+  else
+    vim.cmd 'Copilot enable'
+  end
+
+  vim.notify('GitHub Copilot ' .. (enabled and 'disabled' or 'enabled'))
+end, { desc = '[T]oggle' })
+vim.keymap.set('i', '<C-d>', '<Plug>(copilot-dismiss)', { desc = '[D]ismiss Suggestion' }) -- works
+vim.keymap.set('i', '<C-n>', '<Plug>(copilot-next)', { desc = '[N]ext Suggestion' }) -- works
+vim.keymap.set('i', '<C-p>', '<Plug>(copilot-previous)', { desc = '[P]revious Suggestion' }) -- works
+vim.keymap.set('i', '<C-f>', '<Plug>(copilot-suggest)', { desc = '[F]orce Request Suggestion' }) -- works, dont map to <C-s> or it wont work, and does not work ALL the time (eg. there may be no suggestions on empty lines)
+vim.keymap.set('i', '<C-w>', '<Plug>(copilot-accept-word)', { desc = 'Accept Next [W]ord' }) -- works
+vim.keymap.set('i', '<C-l>', '<Plug>(copilot-accept-line)', { desc = 'Accept Next [L]ine' }) -- works
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -459,14 +466,15 @@ require('lazy').setup({
 
       -- Document existing key chains
       spec = {
+        { '<leader>c', group = '[C]opilot' },
         { '<leader>d', group = '[D]iagnostics' },
-        { '<leader>s', group = '[S]earch' },
-        { '<leader>t', group = '[T]oggle' },
+        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
         { '<leader>m', group = '[M]inimap' },
         { '<leader>mB', group = '[B]uffer' },
-        { '<leader>mW', group = '[W]indow' },
         { '<leader>mT', group = '[T]ab' },
-        { '<leader>h', group = 'Git [H]unk', mode = { 'n', 'v' } },
+        { '<leader>mW', group = '[W]indow' },
+        { '<leader>s', group = '[S]earch' },
+        { '<leader>t', group = '[T]oggle' },
       },
     },
   },
