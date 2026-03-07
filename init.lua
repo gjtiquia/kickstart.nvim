@@ -138,6 +138,19 @@ vim.keymap.set('n', '<leader>tr', function()
   end
 end, { desc = '[T]oggle [R]ose Pine Dawn/Moon' })
 
+-- (GJ) Toggle github copilot
+vim.keymap.set('n', '<leader>tt', function()
+  local enabled = vim.g.copilot_enabled ~= 0
+
+  if enabled then
+    vim.cmd 'Copilot disable'
+  else
+    vim.cmd 'Copilot enable'
+  end
+
+  vim.notify('GitHub Copilot ' .. (enabled and 'disabled' or 'enabled'))
+end, { desc = '[T]oggle GitHub Copilot [T]ab' })
+
 -- (GJ) * is annoying that it always goes to next😂 force it back
 -- see :h star
 -- noremap = non-recursive, so it executes what N actually is, not what N may be otherwise mapped to
@@ -1070,15 +1083,17 @@ require('lazy').setup({
         --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 
         -- (GJ) force show the completion menu even if no keys are inserted yet
-        ['<C-I>'] = {
-          function(cmp)
-            print '<C-I> cmp.show()'
-            cmp.show()
-          end,
-        },
+        -- 2026-03-07 update: i dont use this often, and this calls even when pressing Tab
+        -- ['<C-I>'] = {
+        --   function(cmp)
+        --     print '<C-I> cmp.show()'
+        --     cmp.show()
+        --   end,
+        -- },
 
         -- (GJ) disable tabs, i dun like tab doing cmp.show(), and sometimes i do want to insert tab character
-        ['<Tab>'] = {},
+        -- 2026-03-07 update: i use tab with github copilot tab completion instead, commenting seems to fix it?
+        -- ['<Tab>'] = {},
       },
 
       appearance = {
@@ -1380,6 +1395,11 @@ require('lazy').setup({
       -- (GJ) setup keymaps
       vim.keymap.set('n', '<leader>o', '<cmd>Oil<CR>')
     end,
+  },
+
+  -- (GJ) github copilot
+  {
+    'github/copilot.vim',
   },
 
   -- The following comments only work if you have downloaded the kickstart repo, not just copy pasted the
