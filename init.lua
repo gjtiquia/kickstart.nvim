@@ -1359,7 +1359,7 @@ require('lazy').setup({
         'html',
         'lua',
         'luadoc',
-        -- 'mdx',
+        -- 'mdx', -- this is not part of the nvim-treesitter list, so it will fail unless adding a custom parser
         'markdown',
         'markdown_inline',
         'query',
@@ -1383,6 +1383,13 @@ require('lazy').setup({
     --    - Incremental selection: Included, see `:help nvim-treesitter-incremental-selection-mod`
     --    - Show your current context: https://github.com/nvim-treesitter/nvim-treesitter-context
     --    - Treesitter + textobjects: https://github.com/nvim-treesitter/nvim-treesitter-textobjects
+  },
+
+  -- (GJ) "good enough syntax highlight for MDX"
+  -- seems to be using markdown parser for mdx under the hood
+  {
+    'davidmh/mdx.nvim',
+    dependencies = { 'nvim-treesitter/nvim-treesitter' },
   },
 
   -- (GJ) oil - file operations on a buffer
