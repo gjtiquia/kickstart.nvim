@@ -923,6 +923,18 @@ require('lazy').setup({
         -- add ruff in project dev dependencies
         -- uv add --dev ruff
         ruff = {},
+
+        -- for markdown linting and formatting
+        -- https://github.com/remarkjs/remark-language-server
+        -- npm install remark-language-server
+        -- remark_ls = {
+        --   settings = {
+        --     remark = {
+        --       -- perform actions only if config file is found
+        --       requireConfig = false,
+        --     },
+        --   },
+        -- },
       }
 
       -- Ensure the servers and tools above are installed
