@@ -985,12 +985,12 @@ require('lazy').setup({
     event = { 'BufWritePre' },
     cmd = { 'ConformInfo' },
     keys = {
+      -- (GJ) format all buffers, not just the current one
       {
         '<leader>fa',
         function()
           local conform = require 'conform'
 
-          -- (GJ) format all buffers, not just the current one
           for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
             local isLoaded = vim.api.nvim_buf_is_loaded(bufnr) -- Buffer is currently loaded in memory.
             local isListed = vim.bo[bufnr].buflisted -- Buffer appears in normal buffer lists.
@@ -1008,7 +1008,25 @@ require('lazy').setup({
         mode = '',
         desc = '[F]ormat [A]ll Buffers',
       },
+
+      -- (GJ) format highlighted visual range
+      -- note that not all formatters support partial formatting
+      {
+        '<leader>ff',
+        function()
+          -- (GJ) by default, this already handles format selected range
+          local conform = require 'conform'
+          conform.format {
+            async = true,
+            lsp_format = 'fallback',
+          }
+        end,
+        -- (GJ) by restricting the keybind to only work in visual mode, doing this in normal mode does nothing
+        mode = 'x', -- x means visual mode
+        desc = '[F]ormat Selected Lines',
+      },
     },
+
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
