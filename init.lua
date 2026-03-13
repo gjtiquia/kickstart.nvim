@@ -167,7 +167,9 @@ vim.keymap.set('n', '<leader>dt', function()
   vim.diagnostic.enable(not vim.diagnostic.is_enabled())
 end, { desc = '[T]oggle diagnostics' })
 
--- (GJ) GitHub Copilot keymaps
+-- (GJ) GitHub Copilot
+-- disabled by default
+vim.g.copilot_enabled = 0
 -- lol i know i tried to group them under <leader>c but that doesnt work because the keymaps are insert mode, so i just put the toggle under <leader>ct for now
 vim.keymap.set('n', '<leader>ct', function()
   local enabled = vim.g.copilot_enabled ~= 0
