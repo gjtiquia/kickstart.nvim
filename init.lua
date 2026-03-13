@@ -1579,6 +1579,15 @@ require('lazy').setup({
   -- (GJ) zen mode
   {
     'folke/zen-mode.nvim',
+    keys = {
+      {
+        '<leader>z',
+        function()
+          require('zen-mode').toggle()
+        end,
+        desc = 'Toggle [Z]en mode',
+      },
+    },
     opts = {
       window = {
         backdrop = 1, -- 0.95, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Norm
