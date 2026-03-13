@@ -607,9 +607,11 @@ require('lazy').setup({
       },
     },
   },
+
   {
     -- (GJ)
     -- LSP for csharp and unity
+    -- also sets up native LSP formatting
     'seblyng/roslyn.nvim',
     ft = 'cs',
     ---@module 'roslyn.config'
@@ -622,6 +624,7 @@ require('lazy').setup({
       filewatching = 'roslyn',
     },
   },
+
   {
     -- Main LSP Configuration
     'neovim/nvim-lspconfig',
@@ -953,7 +956,7 @@ require('lazy').setup({
       local ensure_installed = vim.tbl_keys(servers or {})
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
-        'roslyn', -- (GJ) Used to format C# code
+        'roslyn', -- (GJ) Used to format C# code, also LSP
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
@@ -1000,7 +1003,11 @@ require('lazy').setup({
               conform.format {
                 bufnr = bufnr,
                 async = false,
-                lsp_format = 'fallback',
+                -- (GJ) this option means use native LSP formatter if external formatter is not installed (eg. if prettier is not installed)
+                -- (GJ) for C#, this means use roslyn
+                -- (GJ) commented cuz, i want falling back to be intentional, hence additional keybinds for it
+                -- (GJ) eg. <leader>fa doesnt work, try <leader>fA
+                -- lsp_format = 'fallback',
               }
             end
           end
@@ -1011,6 +1018,7 @@ require('lazy').setup({
 
       -- (GJ) format highlighted visual range
       -- note that not all formatters support partial formatting
+      -- eg. lua doesnt work, c# (roslyn) works
       {
         '<leader>ff',
         function()
@@ -1018,12 +1026,44 @@ require('lazy').setup({
           local conform = require 'conform'
           conform.format {
             async = true,
-            lsp_format = 'fallback',
+            -- lsp_format = 'fallback',
           }
         end,
         -- (GJ) by restricting the keybind to only work in visual mode, doing this in normal mode does nothing
         mode = 'x', -- x means visual mode
         desc = '[F]ormat Selected Lines',
+      },
+
+      -- (GJ) native LSP formatting variant (ALL BUFFERS)
+      {
+        '<leader>fA',
+        function()
+          for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+            local isLoaded = vim.api.nvim_buf_is_loaded(bufnr) -- Buffer is currently loaded in memory.
+            local isListed = vim.bo[bufnr].buflisted -- Buffer appears in normal buffer lists.
+            local isModifiable = vim.bo[bufnr].modifiable -- Buffer content can be modified.
+
+            if isLoaded and isListed and isModifiable then
+              vim.lsp.buf.format {
+                bufnr = bufnr,
+                async = false,
+              }
+            end
+          end
+        end,
+        mode = '',
+        desc = '[F]ormat [A]ll Buffers (LSP)',
+      },
+
+      -- (GJ) native LSP formatting variant (ALL LINES in CURRENT BUFFER)
+      -- didnt want to bother with selected lines, thats more of a conform specialty, not a native thing
+      {
+        '<leader>fF',
+        function()
+          vim.lsp.buf.format()
+        end,
+        mode = 'n',
+        desc = '[F]ormat Current Buffer (LSP)',
       },
     },
 
