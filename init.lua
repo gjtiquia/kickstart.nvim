@@ -988,11 +988,25 @@ require('lazy').setup({
       {
         '<leader>fa',
         function()
-          require('conform').format { async = true, lsp_format = 'fallback' }
+          local conform = require 'conform'
+
+          -- (GJ) format all buffers, not just the current one
+          for _, bufnr in ipairs(vim.api.nvim_list_bufs()) do
+            local isLoaded = vim.api.nvim_buf_is_loaded(bufnr) -- Buffer is currently loaded in memory.
+            local isListed = vim.bo[bufnr].buflisted -- Buffer appears in normal buffer lists.
+            local isModifiable = vim.bo[bufnr].modifiable -- Buffer content can be modified.
+
+            if isLoaded and isListed and isModifiable then
+              conform.format {
+                bufnr = bufnr,
+                async = false,
+                lsp_format = 'fallback',
+              }
+            end
+          end
         end,
         mode = '',
-        -- TODO : make this format all files, so it works in tandem with :wa
-        desc = '[F]ormat [A]ll Lines in Buffer',
+        desc = '[F]ormat [A]ll Buffers',
       },
     },
     opts = {
