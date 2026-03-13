@@ -38,6 +38,7 @@ If you are on Astro, you may also need the `prettier-plugin-astro` and [further 
 
 #### Language Setup: C#
 - [dotnet](https://dotnet.microsoft.com/en-us/download)
+- [jb - ReSharper Command Line Tools](https://www.jetbrains.com/help/rider/ReSharper_Command_Line_Tools.html)
 
 #### Language Setup: Go
 - [go](https://go.dev/doc/install)

@@ -1067,6 +1067,61 @@ require('lazy').setup({
         mode = 'n',
         desc = '[F]ormat Current Buffer (LSP)',
       },
+
+      -- (GJ) format current C# file with Rider cleanupcode
+      -- wip, it "works", but its super slow, and can only use AFTER saving the buffer
+      {
+        '<leader>fr',
+        function()
+          -- fail early with required external dependency
+          if vim.fn.executable 'jb' ~= 1 then
+            vim.notify('Cannot format with Rider: `jb` is not in PATH', vim.log.levels.ERROR)
+            return
+          end
+
+          local filename = vim.api.nvim_buf_get_name(bufnr)
+          if filename == '' then
+            vim.notify('Cannot format with Rider: current buffer has no file path', vim.log.levels.ERROR)
+            return
+          end
+
+          if vim.bo[bufnr].modified then
+            vim.notify('Cannot format with Rider: save the current buffer first', vim.log.levels.ERROR)
+            return
+          end
+
+          vim.system(
+            -- dont cleanup code with solution
+            -- it is slower and it also does LARGE re-ordering which is not wanted
+            -- { 'jb', 'cleanupcode', solution, '--include=' .. include },
+            { 'jb', 'cleanupcode', filename },
+            { text = true },
+            vim.schedule_wrap(function(result)
+              if result.code ~= 0 then
+                local output = result.stderr
+                if type(output) ~= 'string' or output == '' then
+                  output = result.stdout
+                end
+                if type(output) ~= 'string' or output == '' then
+                  output = 'unknown error'
+                else
+                  output = output:gsub('%s+$', '')
+                end
+
+                vim.notify('Rider format failed: ' .. output, vim.log.levels.ERROR)
+                return
+              end
+
+              -- Reload buffer after external formatter writes to disk.
+              if vim.api.nvim_buf_is_valid(bufnr) then
+                vim.cmd('checktime ' .. bufnr)
+              end
+            end)
+          )
+        end,
+        mode = 'n',
+        desc = '[F]ormat with [R]ider',
+      },
     },
 
     ---@module "conform"
