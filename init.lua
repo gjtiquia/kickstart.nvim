@@ -986,17 +986,26 @@ require('lazy').setup({
     cmd = { 'ConformInfo' },
     keys = {
       {
-        '<leader>f',
+        '<leader>fa',
         function()
           require('conform').format { async = true, lsp_format = 'fallback' }
         end,
         mode = '',
-        desc = '[F]ormat buffer',
+        -- TODO : make this format all files, so it works in tandem with :wa
+        desc = '[F]ormat [A]ll Lines in Buffer',
       },
     },
     opts = {
       notify_on_error = false,
       format_on_save = function(bufnr)
+        -- (GJ) disable automatic format on save
+        -- want to train up manula format keybindings
+        -- rationale: not all projects follows my personal formatting rules, dont want to waste time configuring nvim to work for all cases
+        -- hence, manual format when it makes sense, no formatting by default
+        if true then
+          return nil
+        end
+
         -- Disable "format_on_save lsp_fallback" for languages that don't
         -- have a well standardized coding style. You can add additional
         -- languages here or re-enable it for the disabled ones.
