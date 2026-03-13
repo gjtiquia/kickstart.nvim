@@ -1028,7 +1028,7 @@ require('lazy').setup({
           local conform = require 'conform'
           conform.format {
             async = true,
-            -- lsp_format = 'fallback',
+            lsp_format = 'fallback', -- we allow fallback here cuz we want selected range formatting for native LSP (eg. roslyn in small code snippets is faster than running jb cleanupcode)
           }
         end,
         -- (GJ) by restricting the keybind to only work in visual mode, doing this in normal mode does nothing
@@ -1057,19 +1057,8 @@ require('lazy').setup({
         desc = '[F]ormat [A]ll Buffers (LSP)',
       },
 
-      -- (GJ) native LSP formatting variant (ALL LINES in CURRENT BUFFER)
-      -- didnt want to bother with selected lines, thats more of a conform specialty, not a native thing
-      {
-        '<leader>fF',
-        function()
-          vim.lsp.buf.format()
-        end,
-        mode = 'n',
-        desc = '[F]ormat Current Buffer (LSP)',
-      },
-
       -- (GJ) format current C# file with Rider cleanupcode
-      -- wip, it "works", but its super slow, and can only use AFTER saving the buffer
+      -- note: its super slow so, meant to run at the "end" of a "coding session", use <leader>ff and select lines for native LSP "temp" formatting
       {
         '<leader>fr',
         function()
@@ -1079,20 +1068,23 @@ require('lazy').setup({
             return
           end
 
+          local bufnr = vim.api.nvim_get_current_buf()
+          if vim.bo[bufnr].modified then
+            vim.notify('Cannot format with Rider: save the current buffer first', vim.log.levels.ERROR)
+            return
+          end
+
           local filename = vim.api.nvim_buf_get_name(bufnr)
           if filename == '' then
             vim.notify('Cannot format with Rider: current buffer has no file path', vim.log.levels.ERROR)
             return
           end
 
-          if vim.bo[bufnr].modified then
-            vim.notify('Cannot format with Rider: save the current buffer first', vim.log.levels.ERROR)
-            return
-          end
+          vim.notify('Formatting with Rider: ' .. filename .. '...')
 
           vim.system(
-            -- dont cleanup code with solution
-            -- it is slower and it also does LARGE re-ordering which is not wanted
+            -- dont call with solution, makes BIG reordering changes which are not desirable
+            -- also MUCH slower as well
             -- { 'jb', 'cleanupcode', solution, '--include=' .. include },
             { 'jb', 'cleanupcode', filename },
             { text = true },
@@ -1116,6 +1108,8 @@ require('lazy').setup({
               if vim.api.nvim_buf_is_valid(bufnr) then
                 vim.cmd('checktime ' .. bufnr)
               end
+
+              vim.notify('Rider format successful: ' .. filename)
             end)
           )
         end,
