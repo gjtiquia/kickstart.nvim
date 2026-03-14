@@ -1169,6 +1169,10 @@ require('lazy').setup({
           -- To organize the imports.
           'ruff_organize_imports',
         },
+
+        -- (GJ) if not using fallback above, need to specify here
+        -- if didnt specify here but using fallback above, still works (as its part of native LSP)
+        go = { 'gofmt' },
       },
     },
   },
