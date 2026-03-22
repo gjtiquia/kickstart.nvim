@@ -878,6 +878,7 @@ require('lazy').setup({
         -- docs: https://go.dev/gopls/editor/vim#neovim
         -- works out-of-the-box! intellisense, formatting etc
         gopls = {},
+        templ = {},
 
         -- rust_analyzer = {},
         -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -1018,6 +1019,18 @@ require('lazy').setup({
         desc = '[F]ormat [A]ll Buffers',
       },
 
+      -- (GJ) format current buffer only
+      {
+        '<leader>fb',
+        function()
+          local conform = require 'conform'
+          conform.format {
+            async = true,
+            -- lsp_format = 'fallback', -- see comment in <leader>fa
+          }
+        end,
+      },
+
       -- (GJ) format highlighted visual range
       -- note that not all formatters support partial formatting
       -- eg. lua doesnt work, c# (roslyn) works
@@ -1055,6 +1068,18 @@ require('lazy').setup({
         end,
         mode = '',
         desc = '[F]ormat [A]ll Buffers (LSP)',
+      },
+
+      -- (GJ) native LSP formatting (current buffer only)
+      {
+        '<leader>fB',
+        function()
+          vim.lsp.buf.format {
+            async = true,
+          }
+        end,
+        mode = 'n',
+        desc = '[F]ormat Current [B]uffer (LSP)',
       },
 
       -- (GJ) format current C# file with Rider cleanupcode
@@ -1173,6 +1198,7 @@ require('lazy').setup({
         -- (GJ) if not using fallback above, need to specify here
         -- if didnt specify here but using fallback above, still works (as its part of native LSP)
         go = { 'gofmt' },
+        templ = { 'templ' },
       },
     },
   },
