@@ -544,7 +544,12 @@ require('lazy').setup({
           path_display = { 'filename_first', 'truncate' },
         },
 
-        -- pickers = {}
+        pickers = {
+          find_files = {
+            -- (GJ) i want to be able to find hidden files (eg. .gitignore, .env, config files)
+            hidden = true,
+          },
+        },
 
         extensions = {
           ['ui-select'] = {
