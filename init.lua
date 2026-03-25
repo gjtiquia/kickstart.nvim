@@ -1034,6 +1034,8 @@ require('lazy').setup({
             -- lsp_format = 'fallback', -- see comment in <leader>fa
           }
         end,
+        mode = 'n',
+        desc = '[F]ormat Current [B]uffer',
       },
 
       -- (GJ) format highlighted visual range
