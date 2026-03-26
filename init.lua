@@ -538,7 +538,7 @@ require('lazy').setup({
           },
 
           -- (GJ) ignore all .meta files (see :help telescope.defaults.file_ignore_patterns)
-          -- file_ignore_patterns = { '%.meta' },
+          file_ignore_patterns = { '%.meta' },
 
           -- (GJ) cuz hard to see long filepaths
           path_display = { 'filename_first', 'truncate' },
@@ -548,6 +548,10 @@ require('lazy').setup({
           find_files = {
             -- (GJ) i want to be able to find hidden files (eg. .gitignore, .env, config files)
             hidden = true,
+
+            -- (GJ) also include gitignored files (eg. scripts in /Library for Unity projects, or source code in /node_modules in JS projects)
+            -- commented because it affects performance, should do it explicitly via keymap (see <leader>sF and <leader>sG)
+            -- no_ignore = true,
           },
         },
 
@@ -566,10 +570,26 @@ require('lazy').setup({
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
+
       vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sF', function()
+        builtin.find_files {
+          file_ignore_patterns = {},
+          no_ignore = true,
+        }
+      end, { desc = '[S]earch [F]iles (DEEP)' })
+
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sw', builtin.grep_string, { desc = '[S]earch current [W]ord' })
+
       vim.keymap.set('n', '<leader>sg', builtin.live_grep, { desc = '[S]earch by [G]rep' })
+      vim.keymap.set('n', '<leader>sG', function()
+        builtin.live_grep {
+          file_ignore_patterns = {},
+          no_ignore = true,
+        }
+      end, { desc = '[S]earch by [G]rep (DEEP)' })
+
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
