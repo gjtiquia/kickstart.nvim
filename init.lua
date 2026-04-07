@@ -537,8 +537,8 @@ require("lazy").setup({
             mirror = true,
           },
 
-          -- (GJ) ignore all .meta files (see :help telescope.defaults.file_ignore_patterns)
-          file_ignore_patterns = { "%.meta", ".git" },
+          -- (GJ) ignore all .meta files, and .git/ stuff at root
+          file_ignore_patterns = { "%.meta", "^%.git/" },
 
           -- (GJ) cuz hard to see long filepaths
           path_display = { "filename_first", "truncate" },
